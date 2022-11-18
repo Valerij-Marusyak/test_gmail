@@ -16,8 +16,10 @@ class LoginPage():
         wait.until(EC.title_is("Gmail"))
 
     def set_english_local(self) -> None:
+        self.driver.save_screenshot('test-reports/' + self.id() + '.png')
         self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
         time.sleep(2)
+        self.driver.save_screenshot('test-reports/' + self.id() + '22' + '.png')
         language_chooser = self.driver.find_element(By.CSS_SELECTOR, "#lang-chooser > div > div.VfPpkd-TkwUic")
         language_chooser.click()
         language_ul = self.driver.find_elements(By.TAG_NAME, 'li')
