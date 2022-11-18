@@ -20,6 +20,7 @@ class LoginTests(unittest.TestCase):
         # self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         self.driver.get('http://mail.google.com')
         self.login_page = LoginPage(self.driver)
+        self.login_page.wait_for_page_is_loaded()
         self.login_page.set_english_local()
 
     def tearDown(self) -> None:

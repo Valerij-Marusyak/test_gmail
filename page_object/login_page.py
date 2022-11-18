@@ -9,6 +9,10 @@ from dataclasses import dataclass
 class LoginPage():
     driver: WebDriver
 
+    def wait_for_page_is_loaded(self) -> None:
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.title_is("Gmail"))
+
     def set_english_local(self) -> None:
         language_chooser = self.driver.find_element(By.XPATH, '//*[@id="lang-chooser"]/div/div[1]')
         language_chooser.click()
