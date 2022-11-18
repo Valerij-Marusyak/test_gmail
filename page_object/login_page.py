@@ -5,7 +5,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from dataclasses import dataclass
 
-
 @dataclass
 class LoginPage():
     driver: WebDriver
@@ -15,8 +14,7 @@ class LoginPage():
         wait.until(EC.title_is("Gmail"))
 
     def set_english_local(self) -> None:
-        """
-        language_chooser = self.driver.find_element(By.CSS_SELECTOR, "#lang-chooser > div > div.VfPpkd-TkwUic")
+        language_chooser = self.driver.find_element(By.XPATH, '//*[@id="lang-chooser"]/div/div[1]')
         language_chooser.click()
         language_ul = self.driver.find_elements(By.TAG_NAME, 'li')
         index = 0
@@ -26,7 +24,7 @@ class LoginPage():
             index += 1
         language_ul[index].click()
         wait = WebDriverWait(self.driver, 10)
-        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[type="button"]')))"""
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[type="button"]')))
 
     def enter_email(self, email: str) -> None:
         email_field = self.get_email_field()

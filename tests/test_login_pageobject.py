@@ -20,7 +20,7 @@ class LoginTests(unittest.TestCase):
         self.driver.get('http://mail.google.com')
         self.login_page = LoginPage(self.driver)
         self.login_page.wait_for_page_is_loaded()
-        #self.login_page.set_english_local()
+        self.login_page.set_english_local()
 
     def tearDown(self) -> None:
         self.driver.save_screenshot('test-reports/' + self.id() + '.png')
