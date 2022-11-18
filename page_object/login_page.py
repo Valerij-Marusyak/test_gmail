@@ -14,7 +14,7 @@ class LoginPage():
         wait.until(EC.title_is("Gmail"))
 
     def set_english_local(self) -> None:
-        language_chooser = self.driver.find_element(By.XPATH, '//*[@id="lang-chooser"]/div/div[1]')
+        language_chooser = self.driver.find_element(By.CSS_SELECTOR, "#lang-chooser > div > div.VfPpkd-TkwUic")
         language_chooser.click()
         language_ul = self.driver.find_elements(By.TAG_NAME, 'li')
         index = 0
