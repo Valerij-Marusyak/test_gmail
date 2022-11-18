@@ -4,6 +4,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from dataclasses import dataclass
+import time
 
 
 @dataclass
@@ -16,6 +17,7 @@ class LoginPage():
 
     def set_english_local(self) -> None:
         self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+        time.sleep(2)
         language_chooser = self.driver.find_element(By.CSS_SELECTOR, "#lang-chooser > div > div.VfPpkd-TkwUic")
         language_chooser.click()
         language_ul = self.driver.find_elements(By.TAG_NAME, 'li')
