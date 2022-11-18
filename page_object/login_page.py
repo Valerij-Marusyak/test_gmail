@@ -4,7 +4,6 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from dataclasses import dataclass
-import time
 
 
 @dataclass
@@ -16,10 +15,6 @@ class LoginPage():
         wait.until(EC.title_is("Gmail"))
 
     def set_english_local(self) -> None:
-        self.driver.save_screenshot('test-reports/1.png')
-        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
-        time.sleep(2)
-        self.driver.save_screenshot('test-reports/2.png')
         """
         language_chooser = self.driver.find_element(By.CSS_SELECTOR, "#lang-chooser > div > div.VfPpkd-TkwUic")
         language_chooser.click()
