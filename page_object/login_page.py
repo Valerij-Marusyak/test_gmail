@@ -20,6 +20,7 @@ class LoginPage():
         self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
         time.sleep(2)
         self.driver.save_screenshot('test-reports/2.png')
+        """
         language_chooser = self.driver.find_element(By.CSS_SELECTOR, "#lang-chooser > div > div.VfPpkd-TkwUic")
         language_chooser.click()
         language_ul = self.driver.find_elements(By.TAG_NAME, 'li')
@@ -30,7 +31,7 @@ class LoginPage():
             index += 1
         language_ul[index].click()
         wait = WebDriverWait(self.driver, 10)
-        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[type="button"]')))
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[type="button"]')))"""
 
     def enter_email(self, email: str) -> None:
         email_field = self.get_email_field()
