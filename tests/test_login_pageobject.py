@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from page_object.login_page import LoginPage
+from webdriver_factory import WebDriverFactory
 
 
 class LoginTests(unittest.TestCase):
@@ -15,43 +16,53 @@ class LoginTests(unittest.TestCase):
         self.password_incorrect = 'john12345smith'
 
     def setUp(self) -> None:
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        self.driver = WebDriverFactory.get_driver()
+        # self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         self.driver.get('http://mail.google.com')
         self.login_page = LoginPage(self.driver)
+        self.login_page.set_english_local()
 
     def tearDown(self) -> None:
-        self.driver.save_screenshot("screenshots/" + self.id() + '.png')
+        self.driver.save_screenshot('test-reports/' + self.id() + '.png')
         self.driver.close()
 
-    def test_01(self):
+    def test_valid_values(self):
         """ valid email and valid password """
         self.login_page.enter_email(self.email)
+        self.login_page.next_button_click()
         self.login_page.enter_password(self.password)
-        self.assertTrue(self.login_page.account_is_present())
+        self.login_page.password_next_button_click()
+        self.assertTrue(self.login_page.wait_for_account_is_present())
 
-    def test_02(self):
+    def test_valid_email_and_incorrect_password(self):
         """ valid email and incorrect password """
         self.login_page.enter_email(self.email)
+        self.login_page.next_button_click()
         self.login_page.enter_password(self.password_incorrect)
+        self.login_page.password_next_button_click()
         alert = self.login_page.alert_password_incorrect()
-        self.assertIn('Неправильний пароль.', alert)
+        self.assertIn('Wrong password.', alert)
 
-    def test_03(self):
+    def test_incorrect_email(self):
         """ incorrect email """
         self.login_page.enter_email(self.email_incorrect)
+        self.login_page.next_button_click()
         alert = self.login_page.alert_email_incorrect()
-        self.assertEqual('Повторити спробу', alert)
+        self.assertEqual('Try again', alert)
 
-    def test_04(self):
+    def test_forgot_password(self):
         """ Verify the ‘Forgot Password’ functionality """
         self.login_page.enter_email(self.email)
-        alert = self.login_page.link_forgot_password()
+        self.login_page.next_button_click()
+        self.login_page.link_forgot_password_click()
+        alert = self.login_page.get_alert_sms()
         self.assertEqual('SMS', alert)
 
-    def test_05(self):
+    def test_forgot_email(self):
         """ Verify the ‘Forgot Email’ functionality """
-        alert = self.login_page.link_forgot_email()
-        self.assertEqual('Введіть номер телефону або резервну електронну адресу', alert)
+        self.login_page.link_forgot_email_click()
+        alert = self.login_page.get_alert_number_of_phone()
+        self.assertEqual('Enter your phone number or recovery email', alert)
 
     ''' 
     I have implemented the basic test cases, imho :). 
@@ -62,6 +73,4 @@ class LoginTests(unittest.TestCase):
     - Verify the login page and all its controls in different browsers
     - Verify the login page by pressing ‘Back button’ of the browser.
       It should not allow you to enter into the system once you log out.
-    
-    Unfortunately, I did not complete them all, because the time for the test task has already ended. 
     '''
