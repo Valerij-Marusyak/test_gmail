@@ -1,31 +1,34 @@
-Тестовое задание
+Test task
 
-Написать план тестирования(сценарий) формы login в gmail.
-Покрыть сценарий с помощью selenium (java/gradle или python/pip) 
-Сделать пуш в гит. В репозитории должен быть 	README.md,  в котором будут инструкции запуска. 
+Write a test plan (script) for the login form in gmail. Cover script with selenium (java/gradle or python/pip). 
+Push to git. The repository should have a README.md that will contain startup instructions.
 
-Сценарий
+Scenario
 
-- Проверить вход с правильным адресом и паролем
-- Проверить вход с неправильным паролем
-- Проверить вход с неправильным адресом
-- Проверить функциональность "Забыл пароль"
-- Проверить функциональность "Забыл адрес"
+Check login with correct address and password
+Check login with wrong password
+Check input with wrong address
+Check "Forgot password" functionality
+Check "Forgot address" functionality
 
-Я реализовал несколько основных, на мой взгляд, тест-кейсов :). Есть еще много других, например:
-- проверить предел количества неудачных попыток входа
-- проверить возможность навигации с помощью клавиши "Табуляция"
-- проверить работу в разных браузерах
-- проверить невозможность логина с помощью нажатия на ссылку "Back" после логаута
+I have implemented the basic test cases, imho :). 
+There are many more cases. For example, 
+    
+- Verify that there is limit on the total number of unsuccessful attempts
+- Use the tab to navigate from username textbox to password textbox and then to the login button.
+- Verify the login page and all its controls in different browsers
+- Verify the login page by pressing ‘Back button’ of the browser.
+  It should not allow you to enter into the system once you log out.
+  
 
-К сожалению, времени на их выполнение просто не осталось :).
+To check if the tests work:
 
-Чтобы проверить работу тестов, можно:
-- Установить Python
-- Установить PyCharm
-- В PyCharm создать новый проект
-- Скопировать в него папки page_object и tests со всем содержимым, а также файл requirements.txt
-- Создать папку screenshots
-- Открыть файл requirements.txt, нажать правую кнопку мыши и выбрать "Install All Packages"
-- Создать конфигурацию запуска для файла test_login_pageobject.py. Рабочей папкой назначить папку tests.
-- Запустить эту конфигурацию и возрадоваться :).
+Python 3.10 and higher is required.
+
+""" shell
+cd <project_folder>
+git clone https://github.com/Valerij-Marusyak/test_gmail.git .
+pip install -r requirements.txt
+"""
+Create run configuration for file <test_login_pageobject.py> and create there environment variables
+SELENIUM_DRIVER_KIND=chrome;WINDOW_RESOLUTION=DESKTOP_1024X768
