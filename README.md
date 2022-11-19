@@ -27,8 +27,11 @@ Python 3.10 and higher is required.
 
 """ shell
 cd <project_folder>
+
 git clone https://github.com/Valerij-Marusyak/test_gmail.git .
+
 pip install -r requirements.txt
+
 """
 Create run configuration for file <test_login_pageobject.py> and create there environment variables
 SELENIUM_DRIVER_KIND=chrome;WINDOW_RESOLUTION=DESKTOP_1024X768
